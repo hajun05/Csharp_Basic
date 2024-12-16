@@ -15,6 +15,9 @@ namespace Csharp_Basic
         public Form1()
         {
             InitializeComponent();
+
+            textBox_print.Text = "어떤 내용이 출력될까?";
+
         }
     }
 }

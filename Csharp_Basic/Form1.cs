@@ -16,42 +16,42 @@ namespace Csharp_Basic
         {
             InitializeComponent();
 
-            byte rocket_engine_num = 4;
-            short rocket_try_num = 3;
-            int rocket_boarding_people = 3;
-            float rocket_feul_mount = 100000.5f;
-            double rocket_spending_money_all_Korea = 300003009220.582;
-            decimal rocket_spending_money_all_America = 54293593857332111454553.299845m;
+            byte locket_engine_num = 4;
+            short locket_try_num = 3;
+            int locket_boarding_people = 3;
+            float locket_feul_mount = 100000.5f;
+            double locket_power = 300000.582;
+            decimal locket_spending_money = 54294553.299845m;
 
             textBox_print.Text
-                += (rocket_engine_num.GetType() +
+                += (locket_engine_num.GetType() +
                 " locket_engine_num : " +
-                rocket_engine_num.ToString() + "\r\n");
+                locket_engine_num.ToString() + "\r\n");
 
             textBox_print.Text
-                += (rocket_try_num.GetType() +
+                += (locket_try_num.GetType() +
                 " locket_try_num : " +
-                rocket_try_num.ToString() + "\r\n");
+                locket_try_num.ToString() + "\r\n");
 
             textBox_print.Text
-                += (rocket_boarding_people.GetType() +
+                += (locket_boarding_people.GetType() +
                 " locket_boarding_people : " +
-                rocket_boarding_people.ToString() + "\r\n");
+                locket_boarding_people.ToString() + "\r\n");
 
             textBox_print.Text
-                += (rocket_feul_mount.GetType() +
+                += (locket_feul_mount.GetType() +
                 " locket_feul_mount : " +
-                rocket_feul_mount.ToString() + "\r\n");
+                locket_feul_mount.ToString() + "\r\n");
 
             textBox_print.Text
-                += (rocket_spending_money_all_Korea.GetType() +
+                += (locket_power.GetType() +
                 " locket_power : " +
-                rocket_spending_money_all_Korea.ToString() + "\r\n");
+                locket_power.ToString() + "\r\n");
 
             textBox_print.Text
-                += (rocket_spending_money_all_America.GetType() +
+                += (locket_spending_money.GetType() +
                 " locket_spending_money : " +
-                rocket_spending_money_all_America.ToString() + "\r\n");
+                locket_spending_money.ToString() + "\r\n");
         }
     }
 }

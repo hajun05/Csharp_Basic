@@ -89,26 +89,32 @@ namespace Csharp_Basic
             #region 실습. 문자열
             {
                 string str = "멈추지 않는 한 얼마나 천천히 가는지는 중요하지 않다. -공자";
+                string str1;
+                string[] str2 = new string[3];
+                string str3;
+
+                // 1번 항목 수행
                 int special_ch = str.IndexOf('-');
+                str1 = str.Remove(special_ch);
+
+                // 2번 항목 수행
+                special_ch = str.IndexOf("얼마나");
                 if (special_ch > -1)
                 {
-                    str = str.Remove(special_ch);
-                }
-                special_ch = str.IndexOf("멈추지");
-                if (special_ch > -1)
-                {
-                    str = str.Remove(special_ch, 9);
-                }
-                special_ch = str.IndexOf("는 중요하지");
-                if (special_ch > -1)
-                {
-                    str = str.Remove(special_ch);
+                    str2 = str.Substring(special_ch, 11).Split(' ');
                 }
 
-                string[] split_str = str.Split(' ');
-                textBox_print.Text = split_str[0] + "\r\n";
-                textBox_print.Text += split_str[1] + "\r\n";
-                textBox_print.Text += split_str[2];
+                // 3번 항목 수행
+                str3 = str.Replace(".", "");
+                str3 = str3.Replace("-", "");
+                str3 = str3.Replace(" ", ",");
+
+                // 출력
+                textBox_print.Text = str1 + "\r\n";
+                textBox_print.Text += str2[0] + "\r\n";
+                textBox_print.Text += str2[1] + "\r\n";
+                textBox_print.Text += str2[2] + "\r\n";
+                textBox_print.Text += str3 + "\r\n";
             }
             #endregion
         }

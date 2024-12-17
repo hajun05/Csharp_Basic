@@ -65,7 +65,8 @@ namespace Csharp_Basic
                 str[3] = "그 사람의 그림자는 그랬다".Replace("그", "이");
                 str[4] = "삼성 갤럭시".Insert(2, " 애플");
                 str[5] = "오늘은 왠지 더 배고프다.".Remove(7, 1);
-                string[] sub_str = "이름, 나이, 전화번호".Split(' ');
+                char[] ch = new char[2] { ',', ' ' };
+                string[] sub_str = "이름, 나이, 전화번호".Split(ch, 3, StringSplitOptions.RemoveEmptyEntries);
                 str[6] = sub_str[0];
                 str[7] = sub_str[1];
                 str[8] = sub_str[2];

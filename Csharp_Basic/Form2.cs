@@ -16,5 +16,10 @@ namespace Csharp_Basic
         {
             InitializeComponent();
         }
+
+        private void ButtonClick_InputToOutput(object sender, EventArgs e)
+        {
+            textBox_result.Text = textBox_input.Text;
+        }
     }
 }

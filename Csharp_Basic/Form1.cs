@@ -26,7 +26,8 @@ namespace Csharp_Basic
             //int dividend = 5;
             //int[] division = TestFuntion_Division(divisor, dividend);
             //textBox_print.Text = 
-            //    String.Format($"{divisor} / {dividend} -> 몫 : {division[0].ToString()}, 나머지 : {division[1].ToString()}\r\n");
+            //    String.Format($"{divisor} / {dividend} ->
+            //    몫 : {division[0].ToString()}, 나머지 : {division[1].ToString()}\r\n");
 
             bool prediction_coin_side = false;
             textBox_print.Text = "동전 면 예측 : ";
@@ -43,6 +44,19 @@ namespace Csharp_Basic
                 textBox_print.Text += "예측 성공, 승리.\r\n";
         }
 
+        bool CoinTossPredictionGame(bool prediction_coin_side)
+        {
+            Random random_coin_toss = new Random();
+            int toss_result_int = random_coin_toss.Next() % 2;
+            bool toss_result_bool = false;
+            if (toss_result_int == 1)
+                toss_result_bool = true;
+
+            if (prediction_coin_side == toss_result_bool)
+                return true;
+            else
+                return false;
+        }
         void TestVariableAndCasting() // 실습. 변수 및 캐스팅
         {
             byte locket_engine_num = 4;
@@ -145,19 +159,6 @@ namespace Csharp_Basic
             result[1] = divisor % dividend;
 
             return result;
-        }
-        bool CoinTossPredictionGame(bool prediction_coin_side)
-        {
-            Random random_coin_toss = new Random();
-            int toss_result_int = random_coin_toss.Next() % 2;
-            bool toss_result_bool = false;
-            if (toss_result_int == 1)
-                toss_result_bool = true;
-
-            if (prediction_coin_side == toss_result_bool)
-                return true;
-            else
-                return false;
         }
     }
 }

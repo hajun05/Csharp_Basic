@@ -36,7 +36,7 @@ namespace Csharp_Basic
                 textBox_print.Text += "앞면\r\n";
 
             textBox_print.Text += "동전 던지기 실행.\r\n";
-            bool result_coin_side = CoinToss(prediction_coin_side);
+            bool result_coin_side = CoinTossPredictionGame(prediction_coin_side);
             if (result_coin_side == false)
                 textBox_print.Text += "예측 실패, 패배.\r\n";
             else
@@ -146,7 +146,7 @@ namespace Csharp_Basic
 
             return result;
         }
-        bool CoinToss(bool prediction_coin_side)
+        bool CoinTossPredictionGame(bool prediction_coin_side)
         {
             Random random_coin_toss = new Random();
             int toss_result_int = random_coin_toss.Next() % 2;

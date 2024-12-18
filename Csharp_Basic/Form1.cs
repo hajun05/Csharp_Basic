@@ -22,11 +22,25 @@ namespace Csharp_Basic
 
             //TestString("멈추지 않는 한 얼마나 천천히 가는지는 중요하지 않다. -공자");
 
-            int divisor = 123;
-            int dividend = 5;
-            int[] division = TestFuntion_Division(divisor, dividend);
-            textBox_print.Text = 
-                String.Format($"{divisor} / {dividend} -> 몫 : {division[0].ToString()}, 나머지 : {division[1].ToString()}\r\n");
+            //int divisor = 123;
+            //int dividend = 5;
+            //int[] division = TestFuntion_Division(divisor, dividend);
+            //textBox_print.Text = 
+            //    String.Format($"{divisor} / {dividend} -> 몫 : {division[0].ToString()}, 나머지 : {division[1].ToString()}\r\n");
+
+            bool prediction_coin_side = false;
+            textBox_print.Text = "동전 면 예측 : ";
+            if (prediction_coin_side == false)
+                textBox_print.Text += "뒷면\r\n";
+            else
+                textBox_print.Text += "앞면\r\n";
+
+            textBox_print.Text += "동전 던지기 실행.\r\n";
+            bool result_coin_side = CoinToss(prediction_coin_side);
+            if (result_coin_side == false)
+                textBox_print.Text += "예측 실패, 패배.\r\n";
+            else
+                textBox_print.Text += "예측 성공, 승리.\r\n";
         }
 
         void TestVariableAndCasting() // 실습. 변수 및 캐스팅
@@ -131,6 +145,19 @@ namespace Csharp_Basic
             result[1] = divisor % dividend;
 
             return result;
+        }
+        bool CoinToss(bool prediction_coin_side)
+        {
+            Random random_coin_toss = new Random();
+            int toss_result_int = random_coin_toss.Next() % 2;
+            bool toss_result_bool = false;
+            if (toss_result_int == 1)
+                toss_result_bool = true;
+
+            if (prediction_coin_side == toss_result_bool)
+                return true;
+            else
+                return false;
         }
     }
 }

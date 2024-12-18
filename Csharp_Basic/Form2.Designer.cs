@@ -62,6 +62,7 @@
             this.button_input.TabIndex = 1;
             this.button_input.Text = "Input";
             this.button_input.UseVisualStyleBackColor = true;
+            this.button_input.Click += new System.EventHandler(this.ButtonClick_InputToOutput);
             // 
             // Form2
             // 

@@ -16,11 +16,17 @@ namespace Csharp_Basic
         {
             InitializeComponent();
 
-            TestVariableAndCasting();
+            //TestVariableAndCasting();
 
-            TestStringAndArray();
+            //TestStringAndArray();
 
-            TestString("멈추지 않는 한 얼마나 천천히 가는지는 중요하지 않다. -공자");
+            //TestString("멈추지 않는 한 얼마나 천천히 가는지는 중요하지 않다. -공자");
+
+            int divisor = 123;
+            int dividend = 5;
+            int[] division = TestFuntion(divisor, dividend);
+            textBox_print.Text = 
+                String.Format($"{divisor} / {dividend} -> 몫 : {division[0].ToString()}, 나머지 : {division[1].ToString()}\r\n");
         }
 
         void TestVariableAndCasting() // 실습. 변수 및 캐스팅
@@ -119,6 +125,15 @@ namespace Csharp_Basic
             textBox_print.Text += str2[1] + "\r\n";
             textBox_print.Text += str2[2] + "\r\n";
             textBox_print.Text += str3 + "\r\n";
+        }
+
+        int[] TestFuntion(int divisor, int dividend) // 실습. 함수
+        {
+            int[] result = new int[2];
+            result[0] = divisor / dividend;
+            result[1] = divisor % dividend;
+
+            return result;
         }
     }
 }

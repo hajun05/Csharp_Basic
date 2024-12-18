@@ -24,7 +24,7 @@ namespace Csharp_Basic
 
             int divisor = 123;
             int dividend = 5;
-            int[] division = TestFuntion(divisor, dividend);
+            int[] division = TestFuntion_Division(divisor, dividend);
             textBox_print.Text = 
                 String.Format($"{divisor} / {dividend} -> 몫 : {division[0].ToString()}, 나머지 : {division[1].ToString()}\r\n");
         }
@@ -68,7 +68,6 @@ namespace Csharp_Basic
                 " locket_spending_money : " +
                 locket_spending_money.ToString() + "\r\n");
         }
-
         void TestStringAndArray() // 실습. 문자열 및 배열
         {
             string[] str = new string[10];
@@ -96,7 +95,6 @@ namespace Csharp_Basic
             textBox_print.Text += str[8] + "\r\n";
             textBox_print.Text += str[9];
         }
-
         void TestString(string str) // 실습. 문자열
         {
             string str1;
@@ -126,8 +124,7 @@ namespace Csharp_Basic
             textBox_print.Text += str2[2] + "\r\n";
             textBox_print.Text += str3 + "\r\n";
         }
-
-        int[] TestFuntion(int divisor, int dividend) // 실습. 함수
+        int[] TestFuntion_Division(int divisor, int dividend) // 실습. 함수
         {
             int[] result = new int[2];
             result[0] = divisor / dividend;

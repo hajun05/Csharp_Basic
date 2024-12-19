@@ -102,7 +102,12 @@ namespace Csharp_Basic
                 win_loss_count[1]++; // 패배 횟수 추가
             }
 
-            textBox_input.Text = "";
+            // 승률 계산. 분자(승리 횟수)에 미리 100을 곱해 float형을 사용하지 않고도 승률 계산 용이
+            uint winnig_rate = win_loss_count[0] * 100 / (win_loss_count[0] + win_loss_count[1]); 
+            textBox_result.Text += string.Format("승패 횟수 : {0} / {1}\r\n", win_loss_count[0], win_loss_count[1]);
+            textBox_result.Text += string.Format("승률 : {0}%\r\n", winnig_rate);
+            textBox_input.Text = ""; // textBox_input에 입력된 값 초기화.
+            // textBox_input.Text = ""; // branch merge conflict 확인용. conflict 유발, 수동 수정
         }
     }
 }

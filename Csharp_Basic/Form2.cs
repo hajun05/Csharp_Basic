@@ -17,52 +17,27 @@ namespace Csharp_Basic
             InitializeComponent();
         }
 
-        private bool prediction_coin_side = false;
-        private bool do_prediction = false;
-        private bool txt_input = false;
-
         private void ButtonClick_InputToOutput(object sender, EventArgs e)
         {
-            string input_str = textBox_input.Text;
-            if (input_str != "")
-            {
-                txt_input = true;
-            }
-
-            if (input_str == "false" || input_str == "False")
-            {
-                textBox_result.Text = "입력하신 값은 False입니다.\r\n";
-                prediction_coin_side = false;
-                do_prediction = true;
-            }
-            else if (input_str == "true" || input_str == "True")
-            {
-                textBox_result.Text = "입력하신 값은 True입니다.\r\n";
-                prediction_coin_side = true;
-                do_prediction = true;
-            }
-            else
-            {
-                textBox_result.Text = "잘못된 값을 입력하셨습니다.\r\n";
-                do_prediction = false;
-            }
-            
-            if (do_prediction == true)
+            bool prediction_coin_side = false;
+            if (Boolean.TryParse(textBox_input.Text, out prediction_coin_side))
             {
                 bool result_coin_side = CoinTossGame(prediction_coin_side);
                 CoinTossGameOutput(prediction_coin_side, result_coin_side);
+            }
+            else
+            {
+                textBox_result.Text = "잘못된 값을 입력하셨습니다.\r\nfalse 혹은 true를 입력해 주십시오.\r\n";
             }
         }
 
         private void FalseButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (txt_input == false)
+            if (textBox_input.Text == "")
             {
                 if (FalseButton.Checked == true)
                 {
-                    textBox_result.Text = "입력하신 값은 False입니다.\r\n";
-                    do_prediction = true;
-
+                    bool prediction_coin_side = false;
                     bool result_coin_side = CoinTossGame(prediction_coin_side);
                     CoinTossGameOutput(prediction_coin_side, result_coin_side);
                 }
@@ -71,13 +46,11 @@ namespace Csharp_Basic
 
         private void TrueButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (txt_input == false)
+            if (textBox_input.Text == "")
             {
                 if (TureButton.Checked == true)
                 {
-                    textBox_result.Text = "입력하신 값은 True입니다.\r\n";
-                    do_prediction = true;
-
+                    bool prediction_coin_side = true;
                     bool result_coin_side = CoinTossGame(prediction_coin_side);
                     CoinTossGameOutput(prediction_coin_side, result_coin_side);
                 }
@@ -87,10 +60,7 @@ namespace Csharp_Basic
         bool CoinTossGame(bool prediction_coin_side)
         {
             Random random_coin_toss = new Random();
-            int toss_result_int = random_coin_toss.Next() % 2;
-            bool toss_result_bool = false;
-            if (toss_result_int == 1)
-                toss_result_bool = true;
+            bool toss_result_bool = (random_coin_toss.Next() % 2 == 1) ? true : false;
 
             if (prediction_coin_side == toss_result_bool)
                 return true;
@@ -100,13 +70,20 @@ namespace Csharp_Basic
 
         void CoinTossGameOutput(bool prediction_coin_toss, bool result_coin_side)
         {
+            if (prediction_coin_toss == true)
+            {
+                textBox_result.Text = "입력하신 값은 True입니다.\r\n";
+            }
+            else
+            {
+                textBox_result.Text = "입력하신 값은 False입니다.\r\n";
+            }
+
             textBox_result.Text += "동전 던지기 결과 ...\r\n";
             if (result_coin_side == prediction_coin_toss)
                 textBox_result.Text += "승리!\r\n";
             else
                 textBox_result.Text += "패배!\r\n";
-
-            do_prediction = false;
         }
     }
 }

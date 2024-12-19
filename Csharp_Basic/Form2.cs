@@ -107,6 +107,7 @@ namespace Csharp_Basic
             textBox_result.Text += string.Format("승패 횟수 : {0} / {1}\r\n", win_loss_count[0], win_loss_count[1]);
             textBox_result.Text += string.Format("승률 : {0}%\r\n", winnig_rate);
             textBox_input.Text = ""; // textBox_input에 입력된 값 초기화.
+            // textBox_input.Text = ""; // branch merge conflict 확인용. conflict 유발, 수동 수정
         }
     }
 }

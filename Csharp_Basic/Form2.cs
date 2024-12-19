@@ -19,40 +19,49 @@ namespace Csharp_Basic
 
         private void ButtonClick_InputToOutput(object sender, EventArgs e)
         {
-            bool prediction_coin_side = false;
-            if (Boolean.TryParse(textBox_input.Text, out prediction_coin_side))
+            if (textBox_input.Text.Length > 0)
             {
-                bool result_coin_side = CoinTossGame(prediction_coin_side);
-                CoinTossGameOutput(prediction_coin_side, result_coin_side);
-            }
-            else
-            {
-                textBox_result.Text = "잘못된 값을 입력하셨습니다.\r\nfalse 혹은 true를 입력해 주십시오.\r\n";
+                bool prediction_coin_side = false;
+                if (bool.TryParse(textBox_input.Text, out prediction_coin_side))
+                {
+                    bool result_coin_side = CoinTossGame(prediction_coin_side);
+                    CoinTossGameOutput(prediction_coin_side, result_coin_side);
+                }
+                else
+                {
+                    textBox_result.Text = "잘못된 값을 입력하셨습니다.\r\nfalse 혹은 true를 입력해 주십시오.\r\n";
+                }
             }
         }
 
         private void FalseButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (textBox_input.Text == "")
+            if (textBox_input.Text.Length == 0)
             {
                 if (FalseButton.Checked == true)
                 {
-                    bool prediction_coin_side = false;
-                    bool result_coin_side = CoinTossGame(prediction_coin_side);
-                    CoinTossGameOutput(prediction_coin_side, result_coin_side);
+                    textBox_input.Text = "false";
+                    button_input.PerformClick(); // buttion_input의 click event 실행. 잘만 응용하면 다른 이벤트들간 반복되는 코드 생략 가능.
+
+                    //bool prediction_coin_side = false;
+                    //bool result_coin_side = CoinTossGame(prediction_coin_side);
+                    //CoinTossGameOutput(prediction_coin_side, result_coin_side);
                 }
             }
         }
 
         private void TrueButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (textBox_input.Text == "")
+            if (textBox_input.Text.Length == 0)
             {
                 if (TureButton.Checked == true)
                 {
-                    bool prediction_coin_side = true;
-                    bool result_coin_side = CoinTossGame(prediction_coin_side);
-                    CoinTossGameOutput(prediction_coin_side, result_coin_side);
+                    textBox_input.Text = "true";
+                    button_input.PerformClick(); // buttion_input의 click event 실행. 잘만 응용하면 다른 이벤트들간 반복되는 코드 생략 가능.
+
+                    //bool prediction_coin_side = true;
+                    //bool result_coin_side = CoinTossGame(prediction_coin_side);
+                    //CoinTossGameOutput(prediction_coin_side, result_coin_side);
                 }
             }
         }
@@ -60,7 +69,7 @@ namespace Csharp_Basic
         bool CoinTossGame(bool prediction_coin_side)
         {
             Random random_coin_toss = new Random();
-            bool toss_result_bool = (random_coin_toss.Next() % 2 == 1) ? true : false;
+            bool toss_result_bool = (random_coin_toss.Next(0, 2) == 1) ? true : false;
 
             if (prediction_coin_side == toss_result_bool)
                 return true;
@@ -84,6 +93,8 @@ namespace Csharp_Basic
                 textBox_result.Text += "승리!\r\n";
             else
                 textBox_result.Text += "패배!\r\n";
+
+            textBox_input.Text = "";
         }
     }
 }

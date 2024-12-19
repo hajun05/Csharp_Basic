@@ -95,6 +95,7 @@ namespace Csharp_Basic
                 textBox_result.Text += "패배!\r\n";
 
             textBox_input.Text = "";
+            textBox_input.Text = ""; // branch merge conflict 확인용.
         }
     }
 }

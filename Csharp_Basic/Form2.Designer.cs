@@ -31,6 +31,8 @@
             this.textBox_input = new System.Windows.Forms.TextBox();
             this.textBox_result = new System.Windows.Forms.TextBox();
             this.button_input = new System.Windows.Forms.Button();
+            this.FalseButton = new System.Windows.Forms.RadioButton();
+            this.TureButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // textBox_input
@@ -45,11 +47,11 @@
             // 
             this.textBox_result.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox_result.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_result.Location = new System.Drawing.Point(13, 54);
+            this.textBox_result.Location = new System.Drawing.Point(13, 92);
             this.textBox_result.Multiline = true;
             this.textBox_result.Name = "textBox_result";
             this.textBox_result.ReadOnly = true;
-            this.textBox_result.Size = new System.Drawing.Size(400, 400);
+            this.textBox_result.Size = new System.Drawing.Size(400, 362);
             this.textBox_result.TabIndex = 2;
             // 
             // button_input
@@ -64,11 +66,39 @@
             this.button_input.UseVisualStyleBackColor = true;
             this.button_input.Click += new System.EventHandler(this.ButtonClick_InputToOutput);
             // 
+            // FalseButton
+            // 
+            this.FalseButton.AutoSize = true;
+            this.FalseButton.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FalseButton.Location = new System.Drawing.Point(13, 54);
+            this.FalseButton.Name = "FalseButton";
+            this.FalseButton.Size = new System.Drawing.Size(93, 31);
+            this.FalseButton.TabIndex = 3;
+            this.FalseButton.TabStop = true;
+            this.FalseButton.Text = "false";
+            this.FalseButton.UseVisualStyleBackColor = true;
+            this.FalseButton.CheckedChanged += new System.EventHandler(this.FalseButton_CheckedChanged);
+            // 
+            // TrueButton
+            // 
+            this.TureButton.AutoSize = true;
+            this.TureButton.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TureButton.Location = new System.Drawing.Point(171, 55);
+            this.TureButton.Name = "TrueButton";
+            this.TureButton.Size = new System.Drawing.Size(81, 31);
+            this.TureButton.TabIndex = 4;
+            this.TureButton.TabStop = true;
+            this.TureButton.Text = "true";
+            this.TureButton.UseVisualStyleBackColor = true;
+            this.TureButton.CheckedChanged += new System.EventHandler(this.TrueButton_CheckedChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(426, 468);
+            this.Controls.Add(this.TureButton);
+            this.Controls.Add(this.FalseButton);
             this.Controls.Add(this.button_input);
             this.Controls.Add(this.textBox_result);
             this.Controls.Add(this.textBox_input);
@@ -84,5 +114,7 @@
         private System.Windows.Forms.TextBox textBox_input;
         private System.Windows.Forms.TextBox textBox_result;
         private System.Windows.Forms.Button button_input;
+        private System.Windows.Forms.RadioButton FalseButton;
+        private System.Windows.Forms.RadioButton TureButton;
     }
 }

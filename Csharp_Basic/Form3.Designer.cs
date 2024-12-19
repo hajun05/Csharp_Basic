@@ -67,7 +67,7 @@
             this.Monday.TabStop = true;
             this.Monday.Text = "월";
             this.Monday.UseVisualStyleBackColor = true;
-            this.Monday.CheckedChanged += new System.EventHandler(this.Monday_CheckedChanged);
+            this.Monday.Click += new System.EventHandler(this.Monday_Click);
             // 
             // Tuesday
             // 
@@ -79,7 +79,7 @@
             this.Tuesday.TabStop = true;
             this.Tuesday.Text = "화";
             this.Tuesday.UseVisualStyleBackColor = true;
-            this.Tuesday.CheckedChanged += new System.EventHandler(this.Tuesday_CheckedChanged);
+            this.Tuesday.Click += new System.EventHandler(this.Tuesday_Click);
             // 
             // Wednesday
             // 
@@ -91,7 +91,7 @@
             this.Wednesday.TabStop = true;
             this.Wednesday.Text = "수";
             this.Wednesday.UseVisualStyleBackColor = true;
-            this.Wednesday.CheckedChanged += new System.EventHandler(this.Wednesday_CheckedChanged);
+            this.Wednesday.Click += new System.EventHandler(this.Wednesday_Click);
             // 
             // Thursday
             // 
@@ -103,7 +103,7 @@
             this.Thursday.TabStop = true;
             this.Thursday.Text = "목";
             this.Thursday.UseVisualStyleBackColor = true;
-            this.Thursday.CheckedChanged += new System.EventHandler(this.Thursday_CheckedChanged);
+            this.Thursday.Click += new System.EventHandler(this.Thursday_Click);
             // 
             // Friday
             // 
@@ -115,7 +115,7 @@
             this.Friday.TabStop = true;
             this.Friday.Text = "금";
             this.Friday.UseVisualStyleBackColor = true;
-            this.Friday.CheckedChanged += new System.EventHandler(this.Friday_CheckedChanged);
+            this.Friday.Click += new System.EventHandler(this.Friday_Click);
             // 
             // Saturday
             // 
@@ -127,7 +127,7 @@
             this.Saturday.TabStop = true;
             this.Saturday.Text = "토";
             this.Saturday.UseVisualStyleBackColor = true;
-            this.Saturday.CheckedChanged += new System.EventHandler(this.Saturday_CheckedChanged);
+            this.Saturday.Click += new System.EventHandler(this.Saturday_Click);
             // 
             // Sunday
             // 
@@ -139,7 +139,7 @@
             this.Sunday.TabStop = true;
             this.Sunday.Text = "일";
             this.Sunday.UseVisualStyleBackColor = true;
-            this.Sunday.CheckedChanged += new System.EventHandler(this.Sunday_CheckedChanged);
+            this.Sunday.Click += new System.EventHandler(this.Sunday_Click);
             // 
             // OutputTxt
             // 

@@ -17,7 +17,7 @@ namespace Csharp_Basic
             InitializeComponent();
         }
 
-        private enum week_name
+        private enum week_name // 요일을 열거형으로 저장.
         {
             monday = 0,
             tuesday, 
@@ -26,84 +26,93 @@ namespace Csharp_Basic
             friday,
             saturday,
             sunday,
-            not = -1
+            not = -1 // 요일이 아닌것을 표시
         }
 
-        private void InputButton_Click(object sender, EventArgs e)
+        private void InputButton_Click(object sender, EventArgs e) // 텍스트 input
         {
             if (InputTxt.Text.Length > 0 )
             {
-                string input_str = InputTxt.Text;
-                week_name choice_day = new week_name();
 
-                switch (input_str)
+                string input_str = InputTxt.Text;
+                week_name choice_day = new week_name(); // 열거형으로 입력된 텍스트에 따라 분기처리
+
+                switch (input_str) // switch문 분기처리
                 {
                     case "monday": case "mon": case "월요일": case "월":
                         choice_day = week_name.monday;
+                        Monday.Checked = true;
                         break;
                     case "tuesday": case "tues": case "화요일": case "화":
                         choice_day = week_name.tuesday;
+                        Tuesday.Checked = true;
                         break;
                     case "wednesday": case "wednes": case "수요일": case "수":
                         choice_day = week_name.wednesday;
+                        Wednesday.Checked = true;
                         break;
                     case "thursday": case "thurs": case "목요일": case "목":
                         choice_day = week_name.thursday;
+                        Thursday.Checked = true;
                         break;
                     case "friday": case "fri": case "금요일": case "금":
                         choice_day = week_name.friday;
+                        Friday.Checked = true;
                         break;
                     case "saturday": case "satur": case "토요일": case "토":
                         choice_day = week_name.saturday;
+                        Saturday.Checked = true;
                         break;
                     case "sunday": case "sun": case "일요일": case "일":
                         choice_day = week_name.sunday;
+                        Sunday.Checked = true;
                         break;
                     default:
                         choice_day = week_name.not;
                         break;
                 }
-                DayOutput(choice_day);
+                DayOutput(choice_day); // 출력
             }
         }
 
-        private void Monday_CheckedChanged(object sender, EventArgs e)
+        // .Checked값 수정시 모든 CheckedChanged 이벤트 시행, 무한루프 위험. Click 이벤트로 대체
+        private void Monday_Click(object sender, EventArgs e) 
         {
             InputTxt.Text = "monday";
             InputButton.PerformClick();
         }
-        private void Tuesday_CheckedChanged(object sender, EventArgs e)
+        private void Tuesday_Click(object sender, EventArgs e)
         {
             InputTxt.Text = "tuesday";
             InputButton.PerformClick();
         }
-        private void Wednesday_CheckedChanged(object sender, EventArgs e)
+        private void Wednesday_Click(object sender, EventArgs e)
         {
             InputTxt.Text = "wednesday";
             InputButton.PerformClick();
         }
-        private void Thursday_CheckedChanged(object sender, EventArgs e)
+        private void Thursday_Click(object sender, EventArgs e)
         {
             InputTxt.Text = "thursday";
             InputButton.PerformClick();
         }
-        private void Friday_CheckedChanged(object sender, EventArgs e)
+        private void Friday_Click(object sender, EventArgs e)
         {
             InputTxt.Text = "friday";
             InputButton.PerformClick();
         }
-        private void Saturday_CheckedChanged(object sender, EventArgs e)
+        private void Saturday_Click(object sender, EventArgs e)
         {
             InputTxt.Text = "saturday";
             InputButton.PerformClick();
         }
-        private void Sunday_CheckedChanged(object sender, EventArgs e)
+        private void Sunday_Click(object sender, EventArgs e)
         {
             InputTxt.Text = "sunday";
             InputButton.PerformClick();
         }
 
-        private void DayOutput(week_name choice_day)
+        private void DayOutput(week_name choice_day) // Txtbox 출력
         {
             switch (choice_day)
             {
@@ -127,6 +136,9 @@ namespace Csharp_Basic
                     break;
                 case week_name.sunday:
                     OutputTxt.Text = "벌써 일요일이라니, 내일 월요일이라니...";
+                    break;
+                default:
+                    OutputTxt.Text = "요일을 선택하세요!";
                     break;
             }
         }

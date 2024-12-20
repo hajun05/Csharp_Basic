@@ -45,17 +45,26 @@ namespace Csharp_Basic
             }
         }
 
-        private void OutputStudentsScore(int student_num, int[,] students_score) // 학생들 점수 출력 함수
+        private void OutputStudentsScore(int students_num, int[,] students_score) // 학생들 점수 출력 함수
         {
             StudentsScoreGridView.Rows.Clear(); // 기존의 datagrid 내용 제거
 
-            for (int i = 0; i < student_num; i++) // 새로운 datagrid 내용 추가
+            //for (int i = 0; i < student_num; i++) // 새로운 datagrid 내용 추가
+            //{
+            //    StudentsScoreGridView.Rows.Add("학생" + i.ToString(),
+            //        students_score[i, (int)Subjects.Korean], // 열거형을 이용한 과목 지정
+            //        students_score[i, (int)Subjects.Math], 
+            //        students_score[i, (int)Subjects.English]);
+            //}
+            int i = 0;
+            while(i < students_num) // for문을 while문으로 변경
             {
                 StudentsScoreGridView.Rows.Add("학생" + i.ToString(),
                     students_score[i, (int)Subjects.Korean], // 열거형을 이용한 과목 지정
-                    students_score[i, (int)Subjects.Math], 
+                    students_score[i, (int)Subjects.Math],
                     students_score[i, (int)Subjects.English]);
-            }
+                i++;
+            }    
         }
 
         private int[,] StudentScoreGeneration(int students_num) // 2차원 배열로 학생들 점수 저장
@@ -63,11 +72,19 @@ namespace Csharp_Basic
             int[,] students_score = new int[students_num, 3];
             Random score = new Random(); 
             
-            for (int i = 0; i < students_num; i++) // 각 과목별 랜덤 점수 저장
+            //for (int i = 0; i < students_num; i++) // 각 과목별 랜덤 점수 저장
+            //{
+            //    students_score[i, (int)Subjects.Korean] = score.Next(0, 101); // 열거형을 이용한 과목 지정
+            //    students_score[i, (int)Subjects.Math] = score.Next(0, 101);
+            //    students_score[i, (int)Subjects.English] = score.Next(0, 101);
+            //}
+            int i = 0;
+            while (i < students_num) // for문을 while문으로 변경
             {
                 students_score[i, (int)Subjects.Korean] = score.Next(0, 101); // 열거형을 이용한 과목 지정
                 students_score[i, (int)Subjects.Math] = score.Next(0, 101);
                 students_score[i, (int)Subjects.English] = score.Next(0, 101);
+                i++;
             }
 
             return students_score; // 점수를 저장한 2차열 배열 반환
@@ -104,13 +121,23 @@ namespace Csharp_Basic
             // header 포함
             if (header)
             {
-                for (int i = 0; i < dgview.Columns.Count; i++)
+                //for (int i = 0; i < dgview.Columns.Count; i++)
+                //{
+                //    csvExport.Write(dgview.Columns[i].HeaderText);
+                //    if (i != dgview.Columns.Count - 1)
+                //    {
+                //        csvExport.Write(delimiter);
+                //    }
+                //}
+                int i = 0;
+                while (i < dgview.Columns.Count) // for문을 while문으로 변경
                 {
                     csvExport.Write(dgview.Columns[i].HeaderText);
                     if (i != dgview.Columns.Count - 1)
                     {
                         csvExport.Write(delimiter);
                     }
+                    i++;
                 }
             }
             csvExport.Write(csvExport.NewLine); //add new line
@@ -120,13 +147,23 @@ namespace Csharp_Basic
             {
                 if (!row.IsNewRow)
                 {
-                    for (int i = 0; i < dgview.Columns.Count; i++)
+                    //for (int i = 0; i < dgview.Columns.Count; i++)
+                    //{
+                    //    csvExport.Write(row.Cells[i].Value);
+                    //    if (i != dgview.Columns.Count - 1)
+                    //    {
+                    //        csvExport.Write(delimiter);
+                    //    }
+                    //}
+                    int i = 0;
+                    while (i < dgview.Columns.Count) // for문을 while문으로 변경
                     {
                         csvExport.Write(row.Cells[i].Value);
                         if (i != dgview.Columns.Count - 1)
                         {
                             csvExport.Write(delimiter);
                         }
+                        i++;
                     }
                     csvExport.Write(csvExport.NewLine); //write new line
                 }

@@ -92,24 +92,41 @@ namespace Csharp_Basic
 
         private void ExportButtonClick(object sender, EventArgs e) // 학생들 점수 cvs파일로 출력. 김예린 크루의 repo 참고.
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "CSV 파일 |*.csv|모든 파일|*.*";
-            saveFileDialog.FilterIndex = 1;
-            // 대화상자를 닫기 전에 디렉토리를 이전에 선택한 디렉토리로 복원한지의 여부를 나타냄
-            saveFileDialog.RestoreDirectory = true;
-            // 확장명을 입려하지 않을 경우, 자동으로 csv로 지정
-            saveFileDialog.AddExtension = true;
-            saveFileDialog.DefaultExt = "csv";
-            // 파일이 이미 존재하면 덮어쓰기를 할지 묻는 대화상자 표시 기본값 = true
-            saveFileDialog.OverwritePrompt = true;
-            // 저장할 위치의 초기 디렉토리 설정
-            saveFileDialog.InitialDirectory = Environment.CurrentDirectory;
+            SaveFileDialog saveFileDialog = GetCsvSave();
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 DataGridViewToCSV(saveFileDialog.FileName, StudentsScoreGridView, true);
             }
         }
+
+        private SaveFileDialog GetCsvSave() // csv파일 export 설정
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            // 디렉토리 관련 설정
+            // export할 디렉토리 위치 저장 
+            string export_path = Environment.CurrentDirectory; // 이 코드의 실행 출력 디렉토리(bin.Debug)
+            // export할 디렉토리가 실존하는지 검사
+            saveFileDialog.CheckPathExists = true;
+            // 저장할 위치의 초기 디렉토리 설정
+            saveFileDialog.InitialDirectory = export_path; 
+            // 대화상자를 닫기 전에 디렉토리를 이전에 선택한 디렉토리로 복원한지의 여부를 나타냄
+            saveFileDialog.RestoreDirectory = true;
+            // 파일이 이미 존재하면 덮어쓰기를 할지 묻는 대화상자 표시.
+            saveFileDialog.OverwritePrompt = true;
+
+            // 확장명 관련 설정
+            // 확장자 자동 추가 옵션
+            saveFileDialog.AddExtension = true;
+            // 확장명을 입려하지 않을 경우, 자동으로 csv로 지정
+            saveFileDialog.DefaultExt = "csv";
+            saveFileDialog.Filter = "CSV 파일 |*.csv|모든 파일|*.*";
+            saveFileDialog.FilterIndex = 1;
+
+            return saveFileDialog;
+        }
+
         private void DataGridViewToCSV(string fileName, DataGridView dgview, bool header)
         {
             string delimiter = ","; //구분자
@@ -118,7 +135,7 @@ namespace Csharp_Basic
 
             if (dgview.Rows.Count == 0) return;
 
-            // header 포함
+            // header가 true면 header 정보 출력
             if (header)
             {
                 //for (int i = 0; i < dgview.Columns.Count; i++)

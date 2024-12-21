@@ -190,6 +190,7 @@ namespace Csharp_Basic
             fs.Close();
 
             InstructionText.Text = "CSV 파일 저장 완료!";
+            // 새 노트북 git 설치 설정 확인용
         }
     }
 }

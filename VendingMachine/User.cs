@@ -8,6 +8,8 @@ namespace Using_VendingMachine
 {
     internal class User
     {
+        private int CashInHand { get; set; }
+        private string CardInHand { get; set; }
         public User() { }
     }
 }

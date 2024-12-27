@@ -8,6 +8,9 @@ namespace Using_VendingMachine
 {
     public class VendingMachine
     {
+        private string BeverageName { get; set; }
+        private int BeverageStock { get; set; }
+        private int StorageCash { get; set; }
         public VendingMachine() { }
     }
 }

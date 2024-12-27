@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Csharp_Basic
+namespace Using_VendingMachine
 {
     internal static class Program
     {
@@ -16,11 +16,7 @@ namespace Csharp_Basic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            //Application.Run(new Form2());
-            //Application.Run(new Form3());
-            //Application.Run(new Form4());
-            //Application.Run(new Form5());
+            Application.Run(new Using_VendingMachine());
         }
     }
 }

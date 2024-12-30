@@ -24,7 +24,7 @@ namespace Using_VendingMachine
         public void Replenishment(ref Beverage existing_beverage, ref int stock)
         {
             // 관리자가 가져온 음료가 기존 음료와 동일
-            if (existing_beverage.beverage_status.Name == beverage.beverage_status.Name)
+            if (existing_beverage.beverage_property.Name == beverage.beverage_property.Name)
             {
                 stock += ReplenishmentStock;
             }

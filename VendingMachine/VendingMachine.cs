@@ -33,8 +33,8 @@ namespace Using_VendingMachine
             balance = 0;
             
             // 음료 정보를 자판기 화면에 출력
-            Beverage_name.Text = beverage.beverage_status.Name;
-            Beverage_price.Text = string.Format($"{beverage.beverage_status.Price}원");
+            Beverage_name.Text = beverage.beverage_property.Name;
+            Beverage_price.Text = string.Format($"{beverage.beverage_property.Price}원");
         }
 
         // 카드 결제 실행
@@ -44,9 +44,9 @@ namespace Using_VendingMachine
             {
                 Beverage_output.Text = "품절되었습니다.";
             }
-            else if(user.InputCard(beverage.beverage_status.Price) > 0)
+            else if(user.InputCard(beverage.beverage_property.Price) > 0)
             {
-                Beverage_output.Text = beverage.beverage_status.Name;
+                Beverage_output.Text = beverage.beverage_property.Name;
                 stock--;
             }
             else
@@ -63,17 +63,17 @@ namespace Using_VendingMachine
                 Beverage_output.Text = "품절되었습니다.";
                 return;
             }
-            else if (storge_cash < beverage.beverage_status.Price)
+            else if (storge_cash < beverage.beverage_property.Price)
             {
                 Beverage_output.Text = "잔액이 부족합니다";
                 return;
             }
-            int input_cash = user.InputCash(beverage.beverage_status.Price);
+            int input_cash = user.InputCash(beverage.beverage_property.Price);
             if (input_cash > 0)
             {
-                Beverage_output.Text = beverage.beverage_status.Name;
-                storge_cash += beverage.beverage_status.Price;
-                balance += input_cash - beverage.beverage_status.Price;
+                Beverage_output.Text = beverage.beverage_property.Name;
+                storge_cash += beverage.beverage_property.Price;
+                balance += input_cash - beverage.beverage_property.Price;
                 Balance.Text = string.Format($"잔액 {balance}원");
                 stock--;
             }
@@ -104,8 +104,8 @@ namespace Using_VendingMachine
             storge_cash = manager.RecoverCash(storge_cash);
 
             // 관리자가 채운 음료 정보를 자판기 화면에 출력
-            Beverage_name.Text = beverage.beverage_status.Name;
-            Beverage_price.Text = string.Format($"{beverage.beverage_status.Price}원");
+            Beverage_name.Text = beverage.beverage_property.Name;
+            Beverage_price.Text = string.Format($"{beverage.beverage_property.Price}원");
         }
     }
 }

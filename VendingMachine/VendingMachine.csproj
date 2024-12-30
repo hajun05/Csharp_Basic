@@ -47,13 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager.cs" />
-    <Compile Include="VendingMachine.cs" />
+    <Compile Include="Beverage.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Using_VendingMachine.cs">
+    <Compile Include="VendingMachine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Using_VendingMachine.Designer.cs">
-      <DependentUpon>Using_VendingMachine.cs</DependentUpon>
+    <Compile Include="VendingMachine.Designer.cs">
+      <DependentUpon>VendingMachine.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,8 +66,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Using_VendingMachine.resx">
-      <DependentUpon>Using_VendingMachine.cs</DependentUpon>
+    <EmbeddedResource Include="VendingMachine.resx">
+      <DependentUpon>VendingMachine.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

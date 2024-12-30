@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp_Basic", "Csharp_Basic\Csharp_Basic.csproj", "{130445A2-8248-4900-96C7-03B5E83D8DAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Using_VendingMachine", "VendingMachine\Using_VendingMachine.csproj", "{D35A5D93-042E-4FEE-B0F4-A42FDA3A327B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{D35A5D93-042E-4FEE-B0F4-A42FDA3A327B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

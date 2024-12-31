@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp_Basic", "Csharp_Basi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{D35A5D93-042E-4FEE-B0F4-A42FDA3A327B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlaying_Game", "RolePlaying_Game\RolePlaying_Game.csproj", "{80C857FD-4D91-4E3A-A035-6152B7102DD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D35A5D93-042E-4FEE-B0F4-A42FDA3A327B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D35A5D93-042E-4FEE-B0F4-A42FDA3A327B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D35A5D93-042E-4FEE-B0F4-A42FDA3A327B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C857FD-4D91-4E3A-A035-6152B7102DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C857FD-4D91-4E3A-A035-6152B7102DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C857FD-4D91-4E3A-A035-6152B7102DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C857FD-4D91-4E3A-A035-6152B7102DD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -55,6 +55,8 @@ namespace RolePlaying_Game
             }
         }
 
+
+
         ~Character()
         {
             Console.WriteLine($"{name}가 사라집니다.");

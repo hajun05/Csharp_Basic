@@ -21,7 +21,7 @@ namespace RolePlaying_Game
         {
             base.Hit(attacked_rate);
 
-            if (HP <= 10 && Rage_Sign == false)
+            if (alive && HP <= 10 && !Rage_Sign)
                 Rage();
         }
 

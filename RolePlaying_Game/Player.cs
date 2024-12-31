@@ -35,6 +35,13 @@ namespace RolePlaying_Game
             Console.WriteLine($"{item_want_sell} 판매. 잔액 : {OwnedMoney}");
         }
 
+        public void LootItem(bool drop_sign)
+        {
+            if (drop_sign)
+            {
+                Console.WriteLine("전리품 획득!");
 
+            }
+        }
     }
 }

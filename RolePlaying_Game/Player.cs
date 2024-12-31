@@ -35,5 +35,6 @@ namespace RolePlaying_Game
             Console.WriteLine($"{item_want_sell} 판매. 잔액 : {OwnedMoney}");
         }
 
+
     }
 }

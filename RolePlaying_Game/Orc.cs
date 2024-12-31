@@ -17,7 +17,7 @@ namespace RolePlaying_Game
             Rage_Sign = false;
         }
 
-        public void Hit(int attacked_rate)
+        public override void Hit(int attacked_rate)
         {
             base.Hit(attacked_rate);
 

@@ -39,14 +39,25 @@ namespace RolePlaying_Game
             return AttackRate;
         }
 
-        public void Hit(int attacked_rate)
+        public virtual void Hit(int attacked_rate)
         {
-            HP -= attacked_rate;
-            if (HP <= 0)
-            {
-                Console.WriteLine($"{name}가 죽었습니다.");
-                alive = false;
+            if (alive)
+            { HP -= attacked_rate;
+                if (HP <= 0)
+                {
+                    Console.WriteLine($"{name}가 죽었습니다.");
+                    alive = false;
+                }
             }
+            else
+            {
+                Console.WriteLine($"이미 {name}은 죽었습니다.");
+            }
+        }
+
+        ~Character()
+        {
+            Console.WriteLine($"{name}가 사라집니다.");
         }
     }
 }

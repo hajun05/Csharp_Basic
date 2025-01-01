@@ -43,5 +43,10 @@ namespace RolePlaying_Game
 
             }
         }
+
+        public void LootMoney()
+        {
+
+        }
     }
 }

@@ -24,21 +24,29 @@ namespace RolePlaying_Game
             base.Hit(attacked_rate);
         }
 
-        public bool Drop()
+        public List<Item> DropItem()
         {
+            List<Item> drop_items = new List<Item>();
             if (!alive)
             {
                 Console.Write("아이템 드랍 : ");
                 foreach (var item in Drop_Item_Table)
                 {
                     if (drop_rate.Next(0, 10) > 5)
+                    {
                         Console.Write($"{item} ");
+                        drop_items.Add(item);
+                    }
                 }
-                Console.WriteLine($"- 머니 드랍 : {Drop_Money}");
-                return true;
             }
-            else
-                return false;
+            return drop_items;
+        }
+
+        public int DropMoney()
+        {
+            int drop_money = Drop_Money + drop_rate.Next(0, 10);
+            Console.WriteLine($"- 머니 드랍 : {drop_money}");
+            return drop_money;
         }
     }
 }

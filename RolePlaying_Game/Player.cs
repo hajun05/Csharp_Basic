@@ -32,9 +32,16 @@ namespace RolePlaying_Game
         }
         public void Sell(Item item_want_sell, int price)
         {
-            owned_items.Remove(item_want_sell);
-            OwnedMoney += price;
-            Console.WriteLine($"{item_want_sell} 판매. 잔액 : {OwnedMoney}");
+            if (this.owned_items.Contains(item_want_sell))
+            {
+                owned_items.Remove(item_want_sell);
+                OwnedMoney += price;
+                Console.WriteLine($"{item_want_sell.name} 판매. 잔액 : {OwnedMoney}");
+            }
+            else
+            {
+                Console.WriteLine($"{item_want_sell.name}을 소유하고 있지 않습니다.");
+            }
         }
 
         public void LootItem(List<Item> drop_items)

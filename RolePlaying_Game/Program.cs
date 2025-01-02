@@ -63,6 +63,9 @@
             Console.WriteLine();
             player.LevelUp(40, 5);
             Console.WriteLine();
+
+            player.Sell(drop_items_orc[0], goods_merchant.Buy(drop_items_orc[0]));
+            player.Sell(sell_items[1], goods_merchant.Buy(sell_items[1]));
         }
     }
 }

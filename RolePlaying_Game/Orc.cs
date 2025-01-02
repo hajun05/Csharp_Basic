@@ -29,7 +29,7 @@ namespace RolePlaying_Game
         {
             AttackRate += Rage_Rate;
             Rage_Sign = true;
-            Console.WriteLine($"{name}가 분노했습니다! 공격력이 더욱 강력해집니다.");
+            Console.WriteLine($"{name}(이)가 분노했습니다! 공격력이 더욱 강력해집니다.");
         }
     }
 }

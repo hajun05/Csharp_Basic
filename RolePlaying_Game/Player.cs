@@ -8,13 +8,15 @@ namespace RolePlaying_Game
 {
     internal class Player : Character
     {
-        private int OwnedMoney { get; set; }
+        public int OwnedMoney { get; private set; }
         private List<Item> owned_items;
+        private int Level { get; set; }
 
         public Player(int owned_money, List<Item> owned_items, string name, int hp, int attackRate) : base(name, hp, attackRate)
         {
             OwnedMoney = owned_money;
             this.owned_items = owned_items;
+            Level = 1;
         }
 
         public void Buy(string item_name_want_buy, int item_price_want_buy)
@@ -35,18 +37,30 @@ namespace RolePlaying_Game
             Console.WriteLine($"{item_want_sell} 판매. 잔액 : {OwnedMoney}");
         }
 
-        public void LootItem(bool drop_sign)
+        public void LootItem(List<Item> drop_items)
         {
-            if (drop_sign)
+            if (drop_items.Count > 0)
             {
                 Console.WriteLine("전리품 획득!");
-
+                owned_items.AddRange(drop_items);
             }
         }
 
-        public void LootMoney()
+        public void LootMoney(int drop_money)
         {
+            if (drop_money > 0)
+            {
+                OwnedMoney += drop_money;
+                Console.WriteLine("머니 획득! 소유 머니 : {0}", OwnedMoney);
+            }
+        }
 
+        public void LevelUp()
+        {
+            this.Level++;
+            Console.WriteLine("{0} 레벨 업! 현재 레벨 : {1}", this.name, this.Level);
+            this.HP += 10;
+            this.AttackRate += 5;
         }
     }
 }

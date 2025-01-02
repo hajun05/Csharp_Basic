@@ -35,17 +35,28 @@ namespace RolePlaying_Game
 
         public int Attack()
         {
-            Console.WriteLine($"{name}의 공격!");
-            return AttackRate;
+            if (alive)
+            {
+                Console.WriteLine($"{name}의 공격!");
+                return AttackRate;
+            }
+            else
+                return -1;
         }
 
         public virtual void Hit(int attacked_rate)
         {
+            if (attacked_rate < 0)
+                return;
             if (alive)
-            { HP -= attacked_rate;
-                if (HP <= 0)
+            {
+                HP -= attacked_rate;
+                if (HP < 0)
+                    HP = 0;
+                Console.WriteLine($"{name}의 남은 HP : {HP}");
+                if (HP == 0)
                 {
-                    Console.WriteLine($"{name}가 죽었습니다.");
+                    Console.WriteLine($"{name}(이)가 죽었습니다.");
                     alive = false;
                 }
             }
@@ -55,11 +66,14 @@ namespace RolePlaying_Game
             }
         }
 
-
+        public virtual void Talk()
+        {
+            Console.WriteLine();
+        }
 
         ~Character()
         {
-            Console.WriteLine($"{name}가 사라집니다.");
+            Console.WriteLine($"{name}(이)가 사라집니다.");
         }
     }
 }

@@ -55,12 +55,28 @@ namespace RolePlaying_Game
             }
         }
 
-        public void LevelUp()
+        public void LevelUp(int up_HP)
         {
             this.Level++;
             Console.WriteLine("{0} 레벨 업! 현재 레벨 : {1}", this.name, this.Level);
-            this.HP += 10;
-            this.AttackRate += 5;
+            this.MaxHP += up_HP;
+            this.HP = this.MaxHP;
+            Console.WriteLine("현재 체력 : {0} - 공격력 {1}", this.HP, this.AttackRate);
+        }
+
+        public void LevelUp(int up_HP, int up_attack_rate)
+        {
+            this.Level++;
+            Console.WriteLine("{0} 레벨 업! 현재 레벨 : {1}", this.name, this.Level);
+            this.MaxHP += up_HP;
+            this.HP = this.MaxHP;
+            this.AttackRate += up_attack_rate;
+            Console.WriteLine("현재 체력 : {0} - 공격력 {1}", this.HP, this.AttackRate);
+        }
+
+        public void LevelUp()
+        {
+            Console.WriteLine("아직 경험치가 충분하지 않습니다. 현재 레벨 : {0}", this.Level);
         }
     }
 }

@@ -22,13 +22,16 @@ namespace RolePlaying_Game
     {
         protected string name;
         protected int HP { get; set; }
+
+        protected int MaxHP { get; set; }
         protected int AttackRate { get; set; }
         protected bool alive { get; set; }
 
-        public Character(string name, int hP, int attackRate)
+        public Character(string name, int hp, int attackRate)
         {
             this.name = name;
-            HP = hP;
+            HP = hp;
+            MaxHP = hp;
             AttackRate = attackRate;
             this.alive = true;
         }

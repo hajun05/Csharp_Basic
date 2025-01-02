@@ -37,6 +37,8 @@
             player.Buy("강철 검", goods_merchant.Sell("강철 검", player.OwnedMoney));
 
             Console.WriteLine();
+            player.LevelUp();
+            Console.WriteLine();
 
             Orc orc1 = new Orc(6, drop_items_orc, 60, "오크 잡졸", 40, 10);
             orc1.Hit(player.Attack());
@@ -47,16 +49,20 @@
             player.LootMoney(orc1.DropMoney());
 
             Console.WriteLine();
+            player.LevelUp(50);
+            Console.WriteLine();
 
             Slime slime1 = new Slime(10, drop_items_slime, 40, "초록 슬라임", 30, 7);
             slime1.Hit(player.Attack());
-            slime1.Hit(player.Attack());
             player.Hit(slime1.Attack());
+            slime1.Hit(player.Attack());
             slime1.Hit(player.Attack());
             player.LootItem(slime1.DropItem());
             player.LootMoney(slime1.DropMoney());
 
-            player.LevelUp();
+            Console.WriteLine();
+            player.LevelUp(40, 5);
+            Console.WriteLine();
         }
     }
 }

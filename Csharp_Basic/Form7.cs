@@ -21,7 +21,7 @@ namespace Csharp_Basic
             {
                 string content = File.ReadAllText(@"C:\Users\Hajun\source\repos\Csharp_Basic\input.txt");
 
-                FileInput(content, out List<int> file_input);
+                FileInput(content, out int content_num, out List<string> final_output);
             }
             catch(DirectoryNotFoundException e)
             {
@@ -29,16 +29,20 @@ namespace Csharp_Basic
             }
         }
 
-        public void FileInput(string file_content, out List<int> file_input)
+        // 파일 내용중 숫자로 변환 가능한 내용만 출력, 변환 불가능한 부분은 _ 기호로 출력
+        public void FileInput(string file_content, out int content_num, out List<string> final_output)
         {
             string[] content = file_content.Split('\n'); 
-            file_input = new List<int>();
+            final_output = new List<string>();
+            content_num = 0;
             int i = 0;
             try
             {
                 for (i = 0; i < content.Length; i++)
                 {
-                    file_input.Add(int.Parse(content[i]));
+                    // 파일 내용이 숫자 변환 가능한지 확인, 불가할시 예외처리
+                    content_num = int.Parse(content[i]);
+                    final_output.Add(content[i]);
                 }
             }
             catch (ArgumentNullException)
@@ -57,40 +61,40 @@ namespace Csharp_Basic
                     int convert;
                     if (int.TryParse(content[j], out convert)) 
                     {
-                        file_input.Add(convert);
+                        final_output.Add(content[j]);
                     }
                     else
                     {
-                        string temp = "";
+                        List<char> temp_char = new List<char>();
                         foreach (char c in content[j])
                         {
                             if ('0' <= c && c <= '9')
                             {
-                                temp += c;
+                                temp_char.Add(c);
                             }
-                            else if (c == '\n')
+                            // 메모장도 줄바꿈 = "\r\n"
+                            else if (c == '\r')
                             {
                                 break;
                             }
                             else
                             {
-                                continue;
+                                temp_char.Add('_');
                             }
                         }
 
-                        if (temp != "")
+                        if (temp_char.Count > 0)
                         {
-                            int.TryParse(temp, out convert);
-                            file_input.Add(convert);
+                            final_output.Add(String.Join("", temp_char));
                         }
                     }
                 }
             }
             finally
             {
-                for (int n = 0; n < file_input.Count; n++)
+                for (int n = 0; n < final_output.Count; n++)
                 {
-                    textBox1.Text += file_input[n].ToString() + "\r\n";
+                    textBox1.Text += final_output[n] + "\r\n";
                 }
             }
         }

@@ -85,6 +85,7 @@ namespace Csharp_Basic
 
                         if (temp_char.Count > 0)
                         {
+                            // char 
                             final_output.Add(String.Join("", temp_char));
                         }
                     }

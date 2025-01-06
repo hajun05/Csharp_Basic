@@ -73,7 +73,8 @@ namespace Csharp_Basic
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception:" + ex.Message.ToString());
+                //Console.WriteLine("Exception:" + ex.Message.ToString());
+                e.Cancel = true;
             }
         }
         void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -81,9 +82,16 @@ namespace Csharp_Basic
             progressBar1.Value = e.ProgressPercentage;
             File_List.Items.Add((string)e.UserState);
         }
-        void Worker_Complete(object sender, EventArgs e)
+        void Worker_Complete(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("파일 검색 완료");
+            if (e.Cancelled)
+            {
+                MessageBox.Show("다시 입력해주세요");
+            }
+            else
+            {
+                MessageBox.Show("작업 완료");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

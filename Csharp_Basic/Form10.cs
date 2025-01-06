@@ -57,14 +57,16 @@ namespace Csharp_Basic
                         last_index = fileInfos[i].LastIndexOf("\\", last_index - 1);
                     }
 
+                    // 마지막에 progress가 100이 되도록 round 반올림 -> 소수점 연산은 정수 연산보다 느림
+                    //this.worker.ReportProgress((int)Math.Round((100.0 / file_num) * (i + 1)), fileInfos[i].Substring(last_index));
                     // ReportProgress로 퍼센트와 progress할 내용 입력
                     if (i + 1 < file_num)
                     {
-                        this.worker.ReportProgress((100 / file_num) * (i + 1), fileInfos[i].Substring(last_index));
+                        this.worker.ReportProgress((100 / file_num) * (i + 1), fileInfos[i].Substring(last_index + 1));
                     }
                     else
                     {
-                        this.worker.ReportProgress(100, fileInfos[i].Substring(last_index));
+                        this.worker.ReportProgress(100, fileInfos[i].Substring(last_index + 1));
                     }
                     Thread.Sleep(50);
                 }

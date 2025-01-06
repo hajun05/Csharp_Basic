@@ -32,14 +32,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.File_List = new System.Windows.Forms.ListBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(12, 42);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(224, 93);
+            this.textBox1.Size = new System.Drawing.Size(224, 63);
             this.textBox1.TabIndex = 0;
             // 
             // button1
@@ -68,11 +69,22 @@
             this.progressBar1.Size = new System.Drawing.Size(304, 26);
             this.progressBar1.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(223, 23);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "입력 : 디렉토리 확장자";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.UseCompatibleTextRendering = true;
+            // 
             // Form10
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(328, 248);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.File_List);
             this.Controls.Add(this.button1);
@@ -90,5 +102,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox File_List;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
     }
 }

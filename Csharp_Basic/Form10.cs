@@ -24,9 +24,17 @@ namespace Csharp_Basic
     public partial class Form10 : Form
     {
         BackgroundWorker worker;
+
+        string[] extension = new string[] // combobox 확장자
+        {
+                    "*.bmp","*.jpg","*.tif", "*.gif","*.png","*.txt","*.pdf"
+        };
+
         public Form10()
         {
             InitializeComponent();
+
+            comboBox1.Items.AddRange(extension); // combobox 확장자 초기화
 
             this.worker = new BackgroundWorker();
             this.worker.WorkerReportsProgress = true;
@@ -40,47 +48,51 @@ namespace Csharp_Basic
         {
             try
             {
-                string[] textBox_input = textBox1.Text.Split(' ');
-                string file_directory = string.Format(@"{0}", textBox_input[0]);
-                string file_extension = string.Format($"*.{textBox_input[1].ToLower()}");
+                //string[] textBox_input = textBox1.Text.Split(' ');
+                //string file_directory = string.Format(@"{0}", textBox_input[0]);
+                //string file_extension = string.Format($"*.{textBox_input[1].ToLower()}");
+                string file_directory = textBox1.Text;
+                string file_extension = comboBox1.SelectedItem as string; // 직접 입력 대신 combobox로 확장자 입력
 
                 // 하위 폴더까지 해당 확장자의 모든 파일을 가져옴
                 string[] fileInfos = Directory.GetFiles(file_directory, file_extension, SearchOption.AllDirectories);
                 int file_num = fileInfos.Length;
 
-                for (int i = 0; i < file_num; i++)
+                if (file_num == 0)
                 {
-                    // 현재 디렉토리 기준 앞 내용 제거, 하위 폴더와 파일 디렉토리만 출력
-                    int last_index = fileInfos[i].Length;
-                    for (int j = 0; j < 2; j++)
+                    MessageBox.Show("찾는 형식의 파일이 존재하지 않습니다.");
+                }
+                else
+                {
+                    for (int i = 0; i < file_num; i++)
                     {
-                        last_index = fileInfos[i].LastIndexOf("\\", last_index - 1);
-                    }
+                        // 현재 디렉토리 기준 앞 내용 제거, 하위 폴더와 파일 디렉토리만 출력
+                        int last_index = fileInfos[i].Length;
+                        for (int j = 0; j < 2; j++)
+                        {
+                            last_index = fileInfos[i].LastIndexOf("\\", last_index - 1);
+                        }
 
-                    // 마지막에 progress가 100이 되도록 round 반올림 -> 소수점 연산은 정수 연산보다 느림
-                    //this.worker.ReportProgress((int)Math.Round((100.0 / file_num) * (i + 1)), fileInfos[i].Substring(last_index));
-                    // ReportProgress로 퍼센트와 progress할 내용 입력
-                    if (i + 1 < file_num)
-                    {
-                        this.worker.ReportProgress((100 / file_num) * (i + 1), fileInfos[i].Substring(last_index + 1));
+                        // 마지막에 progress가 100이 되도록 round 반올림 -> 소수점 연산은 정수 연산보다 느림
+                        //this.worker.ReportProgress((int)Math.Round((100.0 / file_num) * (i + 1)), fileInfos[i].Substring(last_index));
+                        // ReportProgress로 퍼센트와 progress할 내용 입력
+                        // 곱하기가 나누기보다 앞에 나와야 소수점 문제 방지.
+                        this.worker.ReportProgress((i + 1) * 100 / file_num, fileInfos[i].Substring(last_index + 1));
+                        Thread.Sleep(50);
                     }
-                    else
-                    {
-                        this.worker.ReportProgress(100, fileInfos[i].Substring(last_index + 1));
-                    }
-                    Thread.Sleep(50);
                 }
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Exception:" + ex.Message.ToString());
                 e.Cancel = true;
             }
         }
         void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            File_List.Items.Add((string)e.UserState);
+            // Dowork에서 UI 컨트롤을 직접 업데이터하려고 하면 UI스레드와 충돌, 크로스 스레드 오류 발생.
+            // 가능한 UI 컨트롤 업데이트는 ProgressChanged에서 처리
+            File_List.Items.Add(e.UserState.ToString());
         }
         void Worker_Complete(object sender, RunWorkerCompletedEventArgs e)
         {

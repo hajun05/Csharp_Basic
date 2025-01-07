@@ -19,7 +19,11 @@ namespace Csharp_Basic
         public Form9()
         {
             InitializeComponent();
+            InitializeWorker();
+        }
 
+        public void InitializeWorker()
+        {
             this.worker = new BackgroundWorker();
             this.worker.WorkerReportsProgress = true;
             this.worker.WorkerSupportsCancellation = true;
@@ -41,6 +45,7 @@ namespace Csharp_Basic
         {
             //progressBar1.Value += 1;
             // e.ProgressPercentage에 worker.ReportProgress의 반환값이 저장.
+            label1.Text = string.Format($"{e.ProgressPercentage}%");
             progressBar1.Value = e.ProgressPercentage;
         }
         void Worker_Complete(object sender, EventArgs e)

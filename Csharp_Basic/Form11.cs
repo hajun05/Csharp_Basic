@@ -41,7 +41,7 @@ namespace Csharp_Basic
                 thread_racer[racerIndex].Start();
             }
 
-            // 메인 스레드를 대기시켜버리며 invoke가 재대로 수행 불가
+            // 메인 스레드를 대기시켜버리면 invoke가 재대로 수행 불가
             //for (int i = 0; i < 5; i++)
             //{
             //    thread_racer[i].Join();
@@ -50,20 +50,15 @@ namespace Csharp_Basic
 
         public void ThreadRace(int racer_num)
         {
-            //progressBar.Invoke(new Action(() =>
-            //{
-            //    progressBar.Value = nprogress;
-            //    if (nprogress == 100)
-            //    {
-            //        textBox.Invoke(new Action(() => textBox.Text += $"{playerNumber} arrival time : {s[playerNumber]}ms\r\n"));
-            //    }
-            //}));
-
             while (true)
             {
                 int race_time_ms = random.Next(100, 1001);
                 race_spand_time[racer_num] += race_time_ms;
-                if (progressBars[racer_num].InvokeRequired)
+
+                // 스레드 경쟁상태 방지.
+                // main이 아닌 스레드에서 호출할 것이 확실한 상황에선 굳이 현재 메소드를 호출한 스레드를 확인할 필요 없음.
+                //bool check = progressBars[racer_num].InvokeRequired;
+                //if (check)
                 {
                     if (progressBars[racer_num].Value < 100)
                     {
@@ -85,21 +80,21 @@ namespace Csharp_Basic
                         break;
                     }
                 }
-                else
-                {
-                    if (progressBars[racer_num].Value < 100)
-                    {
-                        Thread.Sleep(race_time_ms);
-                        progressBars[racer_num].Value += 5;
-                    }
-                    else
-                    {
-                        TimeSpan timeSpan = TimeSpan.FromMilliseconds(race_spand_time[racer_num]);
-                        textBox1.Text += string.Format($"Thread {racer_num + 1}가 도착했습니다. " +
-                            $"소모 시간 {timeSpan.TotalSeconds}.{timeSpan.TotalMilliseconds:D3}초.\r\n");
-                        break;
-                    }
-                }
+                //else
+                //{
+                //    if (progressBars[racer_num].Value < 100)
+                //    {
+                //        Thread.Sleep(race_time_ms);
+                //        progressBars[racer_num].Value += 5;
+                //    }
+                //    else
+                //    {
+                //        TimeSpan timeSpan = TimeSpan.FromMilliseconds(race_spand_time[racer_num]);
+                //        textBox1.Text += string.Format($"Thread {racer_num + 1}가 도착했습니다. " +
+                //            $"소모 시간 {timeSpan.TotalSeconds}.{timeSpan.TotalMilliseconds:D3}초.\r\n");
+                //        break;
+                //    }
+                //}
             }
         }
     }

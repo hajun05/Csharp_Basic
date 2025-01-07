@@ -60,7 +60,7 @@ namespace Csharp_Basic
 
                 if (file_num == 0)
                 {
-                    MessageBox.Show("찾는 형식의 파일이 존재하지 않습니다.");
+                    e.Result = "Zero";
                 }
                 else
                 {
@@ -99,6 +99,11 @@ namespace Csharp_Basic
             if (e.Cancelled)
             {
                 MessageBox.Show("다시 입력해주세요");
+            }
+            else if (e.Result.ToString() == "Zero")
+            {
+
+                MessageBox.Show("찾는 형식의 파일이 존재하지 않습니다.");
             }
             else
             {

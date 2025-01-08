@@ -32,6 +32,7 @@
             this.buttonStartFileSearch = new System.Windows.Forms.Button();
             this.textBoxDirectory = new System.Windows.Forms.TextBox();
             this.dataGridViewFileInform = new System.Windows.Forms.DataGridView();
+            this.FileExtention = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileDirectory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFileInform)).BeginInit();
@@ -50,7 +51,7 @@
             // 
             this.buttonStartFileSearch.Location = new System.Drawing.Point(195, 12);
             this.buttonStartFileSearch.Name = "buttonStartFileSearch";
-            this.buttonStartFileSearch.Size = new System.Drawing.Size(184, 23);
+            this.buttonStartFileSearch.Size = new System.Drawing.Size(184, 24);
             this.buttonStartFileSearch.TabIndex = 1;
             this.buttonStartFileSearch.Text = "파일 검색 시작";
             this.buttonStartFileSearch.UseVisualStyleBackColor = true;
@@ -69,6 +70,7 @@
             this.dataGridViewFileInform.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dataGridViewFileInform.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFileInform.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FileExtention,
             this.FileName,
             this.FileDirectory});
             this.dataGridViewFileInform.Location = new System.Drawing.Point(13, 74);
@@ -78,6 +80,13 @@
             this.dataGridViewFileInform.RowTemplate.Height = 27;
             this.dataGridViewFileInform.Size = new System.Drawing.Size(366, 322);
             this.dataGridViewFileInform.TabIndex = 3;
+            // 
+            // FileExtention
+            // 
+            this.FileExtention.FillWeight = 30F;
+            this.FileExtention.HeaderText = "확장자";
+            this.FileExtention.MinimumWidth = 6;
+            this.FileExtention.Name = "FileExtention";
             // 
             // FileName
             // 
@@ -93,7 +102,7 @@
             this.FileDirectory.MinimumWidth = 6;
             this.FileDirectory.Name = "FileDirectory";
             // 
-            // Form_1
+            // PP_MultiThread
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,7 +111,7 @@
             this.Controls.Add(this.textBoxDirectory);
             this.Controls.Add(this.buttonStartFileSearch);
             this.Controls.Add(this.comboBoxMultiThread);
-            this.Name = "Form_1";
+            this.Name = "PP_MultiThread";
             this.Text = "Form_1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFileInform)).EndInit();
             this.ResumeLayout(false);
@@ -116,6 +125,7 @@
         private System.Windows.Forms.Button buttonStartFileSearch;
         private System.Windows.Forms.TextBox textBoxDirectory;
         private System.Windows.Forms.DataGridView dataGridViewFileInform;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileExtention;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileDirectory;
     }

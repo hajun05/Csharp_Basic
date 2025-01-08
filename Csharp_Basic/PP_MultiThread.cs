@@ -17,12 +17,15 @@ namespace Csharp_Basic
     // 5. 예외처리도 구현
     public partial class PP_MultiThread : Form
     {
+        // combobox에 입력할 아이템 리스트. 사용할 멀티 스레드 종류
         string[] comboboxList;
 
         public PP_MultiThread()
         {
             InitializeComponent();
-            comboboxList = new string[] { "Backgroundworker", "Thread", "async/await" };
+
+            // Backgroundworker, Thread, async/await
+            comboboxList = new string[] { "BackgroundWorker", "Thread", "async/await" };
             comboBoxMultiThread.Items.AddRange(comboboxList);
         }
 
@@ -30,36 +33,51 @@ namespace Csharp_Basic
         {
             try
             {
-                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-                string directoryPath = folderBrowserDialog.SelectedPath;
+                // 파일을 탐색할 폴더 경로
+                string directoryPath = "";
+                // 멀티 스레드를 구현할 방식. 별개의 클래스로 멀티 스레드 구현 수행
                 string searchMethod = comboBoxMultiThread.SelectedItem as string;
                 
+                // 멀티 스레드 구현 방식을 고르지 않은 경우 예외 던짐
+                if (!comboboxList.Contains(searchMethod))
+                    throw new Exception("파일 탐색에 사용할 멀티 스레드 방식을 선택하십시요.");
+
+                // 선택한 멀티 스레드 구현 방식에 따른 멀티스레드 구현
                 switch (searchMethod)
                 {
-                    case var method when method == comboboxList[0]:
+                    case var method when method == comboboxList[0]: // BackgroundWorker
+                        DirectoryPath(ref directoryPath);
                         FileSearchBackgroundWorker backgroundWorker 
                             = new FileSearchBackgroundWorker(directoryPath);
                         backgroundWorker.StartWork();
                         break;
-                    case var method when method == comboboxList[1]:
+                    case var method when method == comboboxList[1]: // Thread
+                        DirectoryPath(ref directoryPath);
                         FileSearchTread thread = new FileSearchTread();
                         break;
-                    case var method when method == comboboxList[2]:
+                    case var method when method == comboboxList[2]: // async/await
+                        DirectoryPath(ref directoryPath);
                         FileSearchAsyncAwait asyncAwait = new FileSearchAsyncAwait();
                         break;
-                    default:
-                        throw new Exception("파일 탐색에 사용할 멀티 스레드 방식을 선택하십시요.");
-                        break;
                 }
-
+                textBoxDirectory.Text = directoryPath;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        // 파일을 탐색할 폴더 위치 선정 메소드. FolderBrowserDialog 클래스 사용.
+        private void DirectoryPath(ref string directoryPath)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.ShowDialog();
+            directoryPath = folderBrowserDialog.SelectedPath;
+        }
     }
 
+    // BackgroundWorker 구현 클래스
     public class FileSearchBackgroundWorker
     {
         BackgroundWorker worker;
@@ -97,11 +115,13 @@ namespace Csharp_Basic
         }
     }
 
+    // Thread 구현 클래스
     public class FileSearchTread
     {
 
     }
 
+    // async/await 구현 클래스
     public class FileSearchAsyncAwait
     {
 

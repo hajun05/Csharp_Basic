@@ -124,6 +124,12 @@
     <Compile Include="Form9.Designer.cs">
       <DependentUpon>Form9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_1.Designer.cs">
+      <DependentUpon>Form_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

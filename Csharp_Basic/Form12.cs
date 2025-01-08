@@ -28,15 +28,22 @@ namespace Csharp_Basic
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            OpenFileDialog ofd = new OpenFileDialog();
-            if(ofd.ShowDialog() == DialogResult.OK)
+            try
             {
-                string path = ofd.FileName;
-                string file_content = await ReadFileAsync(path);
-                textBox1.Text = file_content;
+                textBox1.Text = "";
+                OpenFileDialog ofd = new OpenFileDialog();
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string path = ofd.FileName;
+                    string file_content = await ReadFileAsync(path);
+                    textBox1.Text = file_content;
+                }
+                //string path = string.Format(@"{0}", textBox2.Text.Replace("\"", ""));
             }
-            //string path = string.Format(@"{0}", textBox2.Text.Replace("\"", ""));
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error : {ex.Message}");
+            }
 
             
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Csharp_Basic
 {
@@ -50,10 +51,12 @@ namespace Csharp_Basic
 
         public void ThreadRace(int racer_num)
         {
+            // 정확한 소모시간 계산 위한 객체 선언
+            Stopwatch stopwatch = Stopwatch.StartNew();
             while (true)
             {
                 int race_time_ms = random.Next(100, 1001);
-                race_spand_time[racer_num] += race_time_ms;
+                //race_spand_time[racer_num] += race_time_ms;
 
                 // 스레드 경쟁상태 방지.
                 // main이 아닌 스레드에서 호출할 것이 확실한 상황에선 굳이 현재 메소드를 호출한 스레드를 확인할 필요 없음.
@@ -63,19 +66,23 @@ namespace Csharp_Basic
                     if (progressBars[racer_num].Value < 100)
                     {
                         Thread.Sleep(race_time_ms);
-                        progressBars[racer_num].Invoke(new MethodInvoker(() =>
+                        // UI 자체 지정(this)
+                        this.Invoke(new MethodInvoker(() =>
                         {
                             progressBars[racer_num].Value += 5;
                         }));
                     }
                     else
                     {
-                        int s = race_spand_time[racer_num] / 1000;
-                        int ms = race_spand_time[racer_num] % 1000;
+                        //int s = race_spand_time[racer_num] / 1000;
+                        //int ms = race_spand_time[racer_num] % 1000;
+                        stopwatch.Stop();
+                        double elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
+                        // UI의 특정 요소 콕 집어서 지정(this { progressBars })
                         progressBars[racer_num].Invoke(new MethodInvoker(() =>
                         {  
                             textBox1.Text += string.Format($"Thread {racer_num + 1}가 도착했습니다. " +
-                            $"소모 시간 {s}.{ms}초.\r\n");
+                            $"소모 시간 {elapsedSeconds:F2}초.\r\n");
                         }));
                         break;
                     }
@@ -96,6 +103,7 @@ namespace Csharp_Basic
                 //    }
                 //}
             }
+
         }
     }
 }

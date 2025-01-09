@@ -16,7 +16,8 @@ namespace Csharp_Basic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PP_MultiThread());
+            //Application.Run(new PP_MultiThread());
+            Application.Run(new Form13());
         }
     }
 }

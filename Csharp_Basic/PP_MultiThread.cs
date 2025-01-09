@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Csharp_Basic
 {
@@ -42,7 +44,7 @@ namespace Csharp_Basic
                 if (!comboboxList.Contains(searchMethod))
                     throw new Exception("파일 탐색에 사용할 멀티 스레드 방식을 선택하십시요.");
 
-                // 선택한 멀티 스레드 구현 방식에 따른 멀티스레드 구현
+                // 선택한 멀티 스레드 구현 방식에 따른 멀티스레드 선언과 실행
                 switch (searchMethod)
                 {
                     case var method when method == comboboxList[0]: // BackgroundWorker
@@ -53,7 +55,7 @@ namespace Csharp_Basic
                         break;
                     case var method when method == comboboxList[1]: // Thread
                         DirectoryPath(ref directoryPath);
-                        FileSearchTread thread = new FileSearchTread();
+                        FileSearchThread thread = new FileSearchThread(directoryPath);
                         break;
                     case var method when method == comboboxList[2]: // async/await
                         DirectoryPath(ref directoryPath);
@@ -77,30 +79,38 @@ namespace Csharp_Basic
         }
     }
 
-    // BackgroundWorker 구현 클래스
-    public class FileSearchBackgroundWorker
+    public class MultiThreadFileSearch
+    {
+        internal string FileDirectory { get; set; }
+        internal Stopwatch stopwatch;
+
+        public MultiThreadFileSearch(string fileDirectory)
+        {
+            this.FileDirectory = fileDirectory;
+        }
+    }
+
+    // BackgroundWorker 구현 클래스.
+    public class FileSearchBackgroundWorker : MultiThreadFileSearch
     {
         BackgroundWorker worker;
         string fileDirectory;
 
-        public FileSearchBackgroundWorker(string fileDirectory)
+        public FileSearchBackgroundWorker(string fileDirectory) : base(fileDirectory)
         {
-            this.worker = new BackgroundWorker();
             this.worker.WorkerReportsProgress = true;
             this.worker.WorkerSupportsCancellation = true;
 
             this.worker.DoWork += new DoWorkEventHandler(Worker_Dowork);
             this.worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
             this.worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_Complete);
-
-            this.fileDirectory = fileDirectory;
         }
 
         public void StartWork()
         {
-            if (!worker.IsBusy)
+            if (!this.worker.IsBusy)
             {
-                worker.RunWorkerAsync();
+                this.worker.RunWorkerAsync();
             }
         }
 
@@ -115,10 +125,22 @@ namespace Csharp_Basic
         }
     }
 
-    // Thread 구현 클래스
-    public class FileSearchTread
+    // Thread 구현 클래스.
+    public class FileSearchThread
     {
+        Thread filesearchThread;
+        string fileDirectory;
 
+        public FileSearchThread(string fileDirectory)
+        {
+            filesearchThread = new Thread(new ThreadStart(FileSearch));
+            this.fileDirectory = fileDirectory;
+        }
+
+        public void FileSearch()
+        {
+
+        }
     }
 
     // async/await 구현 클래스

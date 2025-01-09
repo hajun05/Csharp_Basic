@@ -117,7 +117,7 @@
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(76, 23);
             this.labelTime.TabIndex = 5;
-            this.labelTime.Text = ":ms";
+            this.labelTime.Text = ":s";
             this.labelTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PP_MultiThread

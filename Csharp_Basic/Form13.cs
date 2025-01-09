@@ -98,6 +98,7 @@ namespace Csharp_Basic
             if(eventDict.ContainsKey(eventName))
             {
                 eventDict[eventName].Invoke(eventName);
+                // == eventDict[eventName](eventName);
                 // this 안되는 이유 : 대리자.invoke -> 대리자 즉각 실행. 좀더 안전하게 대리자 실행, UI 접근.
             }
             else

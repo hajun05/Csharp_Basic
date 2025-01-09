@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Csharp_Basic
 {
@@ -16,7 +18,8 @@ namespace Csharp_Basic
     // 2. 각 방법들 중 원하는 방법을 골라 파일 검색 실행. 각 방법들에 걸린 시간도 체크
     // 3. 파일 경로 선택, 해당 경로의 특정 확장자의 모든 파일을 조회
     // 4. 조회한 파일 목록을 gridview로 출력
-    // 5. 예외처리도 구현
+    // 5. 3 - 4 과정을 from 메소드화, 대리자를 통해 멀티스레드 객체에 전달.
+    // 6. 예외처리도 구현
     public partial class PP_MultiThread : Form
     {
         // combobox에 입력할 아이템 리스트. 사용할 멀티 스레드 종류
@@ -45,24 +48,26 @@ namespace Csharp_Basic
                     throw new Exception("파일 탐색에 사용할 멀티 스레드 방식을 선택하십시요.");
 
                 // 선택한 멀티 스레드 구현 방식에 따른 멀티스레드 선언과 실행
-                switch (searchMethod)
-                {
-                    case var method when method == comboboxList[0]: // BackgroundWorker
-                        DirectoryPath(ref directoryPath);
-                        FileSearchBackgroundWorker backgroundWorker 
-                            = new FileSearchBackgroundWorker(directoryPath);
-                        backgroundWorker.StartWork();
-                        break;
-                    case var method when method == comboboxList[1]: // Thread
-                        DirectoryPath(ref directoryPath);
-                        FileSearchThread thread = new FileSearchThread(directoryPath);
-                        break;
-                    case var method when method == comboboxList[2]: // async/await
-                        DirectoryPath(ref directoryPath);
-                        FileSearchAsyncAwait asyncAwait = new FileSearchAsyncAwait();
-                        break;
-                }
+                //switch (searchMethod)
+                //{
+                //    case var method when method == comboboxList[0]: // BackgroundWorker
+                //        DirectoryPath(ref directoryPath);
+                //        FileSearchBackgroundWorker backgroundWorker 
+                //            = new FileSearchBackgroundWorker(directoryPath);
+                //        backgroundWorker.StartWork();
+                //        break;
+                //    case var method when method == comboboxList[1]: // Thread
+                //        DirectoryPath(ref directoryPath);
+                //        FileSearchThread thread = new FileSearchThread(directoryPath);
+                //        break;
+                //    case var method when method == comboboxList[2]: // async/await
+                //        DirectoryPath(ref directoryPath);
+                //        FileSearchAsyncAwait asyncAwait = new FileSearchAsyncAwait();
+                //        break;
+                //}
+                DirectoryPath(ref directoryPath);
                 textBoxDirectory.Text = directoryPath;
+                FileList(directoryPath);
             }
             catch (Exception ex)
             {
@@ -74,36 +79,62 @@ namespace Csharp_Basic
         private void DirectoryPath(ref string directoryPath)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.ShowDialog();
-            directoryPath = folderBrowserDialog.SelectedPath;
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                directoryPath = folderBrowserDialog.SelectedPath;
+            }
+            else
+            {
+                throw new Exception("파일을 탐색할 경로를 지정하십시오.");
+            }
         }
-    }
 
-    public class MultiThreadFileSearch
-    {
-        internal string FileDirectory { get; set; }
-        internal Stopwatch stopwatch;
-
-        public MultiThreadFileSearch(string fileDirectory)
+        private void FileList(string directoryPath)
         {
-            this.FileDirectory = fileDirectory;
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            string[] fileInfos = Directory.GetFiles(directoryPath, "*.pdf", SearchOption.AllDirectories);
+
+            if (fileInfos.Length == 0)
+            {
+                throw new Exception("해당 디렉토리에는 파일이 존재하지 않습니다.");
+            }
+
+            dataGridViewFileInform.Rows.Clear();
+            foreach (string fileInfo in fileInfos)
+            {
+                string extension = Path.GetExtension(fileInfo);
+                string name = Path.GetFileNameWithoutExtension(fileInfo);
+
+                dataGridViewFileInform.Rows.Add(extension, name, fileInfo);
+            }
+
+            stopwatch.Stop();
+            double elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
+            labelTime.Text = string.Format($"{elapsedSeconds:F2}:s");
         }
     }
+
 
     // BackgroundWorker 구현 클래스.
-    public class FileSearchBackgroundWorker : MultiThreadFileSearch
+    public class FileSearchBackgroundWorker
     {
         BackgroundWorker worker;
         string fileDirectory;
 
-        public FileSearchBackgroundWorker(string fileDirectory) : base(fileDirectory)
+        public FileSearchBackgroundWorker(string fileDirectory)
         {
+            this.worker = new BackgroundWorker();
+
             this.worker.WorkerReportsProgress = true;
             this.worker.WorkerSupportsCancellation = true;
 
             this.worker.DoWork += new DoWorkEventHandler(Worker_Dowork);
             this.worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
             this.worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_Complete);
+
+            this.fileDirectory = fileDirectory;
         }
 
         public void StartWork()

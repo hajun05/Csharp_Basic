@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Csharp_Basic
 {
+    // 대리자 선언
     public delegate void EventDelegate(string message);
 
     public partial class Form13 : Form
@@ -26,29 +27,33 @@ namespace Csharp_Basic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string message = "이벤트 추가";
-            thread = new Thread(() => eventManager.EventAdd(message, ShowMessage));
+            string message = "Event1";
+            thread = new Thread(() => eventManager.EventAdd(message, ShowMessage1));
             thread.Start();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string message = "이벤트 추가";
-            thread = new Thread(() => eventManager.EventRemove(message, ShowMessage));
+            string message = "Event2";
+            thread = new Thread(() => eventManager.EventRemove(message, ShowMessage1));
             thread.Start();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string message = "이벤트 추가";
-            thread = new Thread(() => eventManager.EventInvoke(message, ShowMessage));
+            string message = "Event3";
+            thread = new Thread(() => eventManager.EventInvoke(message, ShowMessage2));
             thread.Start();
             
         }
 
-        public void ShowMessage(string message)
+        public void ShowMessage1(string message)
         {
-            MessageBox.Show(message);
+            MessageBox.Show("Method1 received: " + message);
+        }
+        public void ShowMessage2(string message)
+        {
+            MessageBox.Show("Method2 received: " + message);
         }
     }
 
